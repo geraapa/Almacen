@@ -4,36 +4,45 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="panel panel-success" style="margin-top: 10px;">
+    <div class="panel-heading">
+        <h4>Catálogo de Modelos</h4>
+    </div>
+    <div class="panel-body">
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    Descripción@*@Html.DisplayNameFor(model => model.vchDescripcion)*@
+                </th>
+                <th>
+                    Clave@*@Html.DisplayNameFor(model => model.vchClave)*@
+                </th>
+                <th></th>
+            </tr>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            Descripción@*@Html.DisplayNameFor(model => model.vchDescripcion)*@
-        </th>
-        <th>
-            Clave@*@Html.DisplayNameFor(model => model.vchClave)*@
-        </th>
-        <th></th>
-    </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vchDescripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vchClave)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.iIdModelo }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.iIdModelo }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.iIdModelo })
+                    </td>
+                </tr>
+            }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.vchDescripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.vchClave)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.iIdModelo }) |
-            @Html.ActionLink("Details", "Details", new { id=item.iIdModelo }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.iIdModelo })
-        </td>
-    </tr>
-}
+        </table>
+    </div>
+</div>
 
-</table>
+
+
