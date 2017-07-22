@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AlmacenSistemaTG.Models.Almacen>
+﻿@model IEnumerable<AlmacenSistemaTG.Models.Marca>
 
 @{
     ViewBag.Title = "Index";
@@ -12,10 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            Descripción<!--@Html.DisplayNameFor(model => model.vchDescripcion)-->
+            Descripción@*@Html.DisplayNameFor(model => model.vchDescripcion)*@
         </th>
         <th>
-            Clave<!--@Html.DisplayNameFor(model => model.vchClave)-->
+            Clave@*@Html.DisplayNameFor(model => model.vchClave)*@
         </th>
         <th></th>
     </tr>
@@ -29,9 +29,9 @@
             @Html.DisplayFor(modelItem => item.vchClave)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.iIdAlmacen }) |
-            @Html.ActionLink("Details", "Details", new { id=item.iIdAlmacen }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.iIdAlmacen })
+            @Html.ActionLink("Edit", "Edit", new { id=item.iIdMarca }) |
+            @Html.ActionLink("Details", "Details", new { id=item.iIdMarca }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.iIdMarca })
         </td>
     </tr>
 }

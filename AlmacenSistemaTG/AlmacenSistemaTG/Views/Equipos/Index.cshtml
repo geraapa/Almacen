@@ -1,0 +1,63 @@
+﻿@model IEnumerable<AlmacenSistemaTG.Models.Equipo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.vchNoSerie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iExistencia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vchProveedor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Almacen.vchDescripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Marca.vchDescripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Modelo.vchDescripcion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.vchNoSerie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iExistencia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.vchProveedor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Almacen.vchDescripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Marca.vchDescripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Modelo.vchDescripcion)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.iIdEquipo }) |
+            @Html.ActionLink("Details", "Details", new { id=item.iIdEquipo }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.iIdEquipo })
+        </td>
+    </tr>
+}
+
+</table>
