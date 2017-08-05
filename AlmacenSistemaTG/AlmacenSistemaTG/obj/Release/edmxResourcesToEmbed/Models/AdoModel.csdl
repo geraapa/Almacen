@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SistemaAlmacenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Almacen">
+    <Key>
+      <PropertyRef Name="iIdAlmacen" />
+    </Key>
+    <Property Name="iIdAlmacen" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="vchDescripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="vchClave" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Equipoes" Relationship="Self.FK_Equipo_Almacen" FromRole="Almacen" ToRole="Equipo" />
+  </EntityType>
+  <EntityType Name="Equipo">
+    <Key>
+      <PropertyRef Name="iIdEquipo" />
+    </Key>
+    <Property Name="iIdEquipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="iIdMarca" Type="Int32" Nullable="false" />
+    <Property Name="iIdModelo" Type="Int32" Nullable="false" />
+    <Property Name="vchNoSerie" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="iExistencia" Type="Int32" />
+    <Property Name="vchProveedor" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="iIdAlmacen" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Almacen" Relationship="Self.FK_Equipo_Almacen" FromRole="Equipo" ToRole="Almacen" />
+    <NavigationProperty Name="Marca" Relationship="Self.FK_Equipo_Marca" FromRole="Equipo" ToRole="Marca" />
+    <NavigationProperty Name="Modelo" Relationship="Self.FK_Equipo_Modelo" FromRole="Equipo" ToRole="Modelo" />
+  </EntityType>
+  <EntityType Name="Marca">
+    <Key>
+      <PropertyRef Name="iIdMarca" />
+    </Key>
+    <Property Name="iIdMarca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="vchDescripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="vchClave" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Equipoes" Relationship="Self.FK_Equipo_Marca" FromRole="Marca" ToRole="Equipo" />
+  </EntityType>
+  <EntityType Name="Modelo">
+    <Key>
+      <PropertyRef Name="iIdModelo" />
+    </Key>
+    <Property Name="iIdModelo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="vchDescripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="vchClave" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Equipoes" Relationship="Self.FK_Equipo_Modelo" FromRole="Modelo" ToRole="Equipo" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Equipo_Almacen">
+    <End Role="Almacen" Type="Self.Almacen" Multiplicity="1" />
+    <End Role="Equipo" Type="Self.Equipo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Almacen">
+        <PropertyRef Name="iIdAlmacen" />
+      </Principal>
+      <Dependent Role="Equipo">
+        <PropertyRef Name="iIdAlmacen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Equipo_Marca">
+    <End Role="Marca" Type="Self.Marca" Multiplicity="1" />
+    <End Role="Equipo" Type="Self.Equipo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Marca">
+        <PropertyRef Name="iIdMarca" />
+      </Principal>
+      <Dependent Role="Equipo">
+        <PropertyRef Name="iIdMarca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Equipo_Modelo">
+    <End Role="Modelo" Type="Self.Modelo" Multiplicity="1" />
+    <End Role="Equipo" Type="Self.Equipo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Modelo">
+        <PropertyRef Name="iIdModelo" />
+      </Principal>
+      <Dependent Role="Equipo">
+        <PropertyRef Name="iIdModelo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SistemaAlmacenEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Almacens" EntityType="Self.Almacen" />
+    <EntitySet Name="Equipoes" EntityType="Self.Equipo" />
+    <EntitySet Name="Marcas" EntityType="Self.Marca" />
+    <EntitySet Name="Modeloes" EntityType="Self.Modelo" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_Equipo_Almacen" Association="Self.FK_Equipo_Almacen">
+      <End Role="Almacen" EntitySet="Almacens" />
+      <End Role="Equipo" EntitySet="Equipoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Equipo_Marca" Association="Self.FK_Equipo_Marca">
+      <End Role="Marca" EntitySet="Marcas" />
+      <End Role="Equipo" EntitySet="Equipoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Equipo_Modelo" Association="Self.FK_Equipo_Modelo">
+      <End Role="Modelo" EntitySet="Modeloes" />
+      <End Role="Equipo" EntitySet="Equipoes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,72 @@
+﻿@model IEnumerable<AlmacenSistemaTG.Models.Equipo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="panel panel-warning" style="margin-top: 10px;">
+    <div class="panel-heading">
+        <h4>Catálogo de Equipos</h4>
+    </div>
+    <div class="panel-body">
+        <p>
+            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success pull-right" })
+        </p>
+        <table style="margin-top:10px;" class="table table-striped">
+            <tr>
+                <th>
+                    No. Serie@*@Html.DisplayNameFor(model => model.vchNoSerie)*@
+                </th>
+                <th>
+                   Existencia@*@Html.DisplayNameFor(model => model.iExistencia)*@
+                </th>
+                <th>
+                   Proveedor@*@Html.DisplayNameFor(model => model.vchProveedor)*@
+                </th>
+                <th>
+                   Almacén@*@Html.DisplayNameFor(model => model.Almacen.vchDescripcion)*@
+                </th>
+                <th>
+                   Marca@*@Html.DisplayNameFor(model => model.Marca.vchDescripcion)*@
+                </th>
+                <th>
+                   Modelo@*@Html.DisplayNameFor(model => model.Modelo.vchDescripcion)*@
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vchNoSerie)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.iExistencia)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vchProveedor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Almacen.vchDescripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Marca.vchDescripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Modelo.vchDescripcion)
+                    </td>
+                    <td>
+                        @Html.ActionLink(" Edit", "Edit", new { id = item.iIdEquipo }, new { @class = "glyphicon glyphicon-pencil btn btn-default" }) 
+                        @Html.ActionLink(" Details", "Details", new { id = item.iIdEquipo }, new { @class = "glyphicon glyphicon-th-list btn btn-primary" }) 
+                        @Html.ActionLink(" Delete", "Delete", new { id = item.iIdEquipo }, new { @class = "glyphicon glyphicon-remove btn btn-danger" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+
+
